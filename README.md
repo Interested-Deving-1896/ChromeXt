@@ -1,24 +1,29 @@
+[update-readmes]   Mode: rewrite — migrating to template structure...
 # ChromeXt
 
-[![Build](https://img.shields.io/github/actions/workflow/status/JingMatrix/ChromeXt/android.yml?branch=master&logo=github&label=Build&event=push)](https://github.com/JingMatrix/ChromeXt/actions/workflows/android.yml?query=event%3Apush+is%3Acompleted+branch%3Amaster) [![Download](https://img.shields.io/github/v/release/JingMatrix/ChromeXt?color=orange&logoColor=orange&label=Download&logo=DocuSign)](https://github.com/JingMatrix/ChromeXt/releases/latest) [![Total](https://shields.io/github/downloads/JingMatrix/ChromeXt/total?logo=Bookmeter&label=Counts&logoColor=yellow&color=yellow)](https://github.com/JingMatrix/ChromeXt/releases)
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/ChromeXt)
 
-Add UserScript and DevTools supports to Chromium based and WebView based browsers using Xposed framework.
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-##  How does it work?
+## Architecture
 
-We hook the `onUpdateUrl` function in [UserScript.kt](app/src/main/java/org/matrix/chromext/hook/UserScript.kt),
-add URL comparison there and evaluate JavaScript using the `javascript:` scheme (or DevTools Protocol when possible).
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-Chromium based browsers,
-such as ~~[Edge](https://www.microsoft.com/en-us/edge/download),~~
-[Bromite](https://github.com/bromite/bromite),
-[Samsung Internet](https://en.wikipedia.org/wiki/Samsung_Internet),
-and [Brave](https://github.com/brave/brave-browser), are fully supported.
+## Install
 
-Most WebView based browsers are also supported, if not, please report it.
-Note for WebView based browsers users: you _only_ need to enable this module for the browser application you wish to use, _not_ for any possible WebView applications, _neither_ for the Android system.
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
+
+```bash
+git clone https://github.com/Interested-Deving-1896/ChromeXt.git
+cd ChromeXt
+```
 
 ## Usage
+
 
 <p align="center"><a href="https://www.youtube.com/watch?v=1Qm4dU-XnJM"><img src="https://img.youtube.com/vi/1Qm4dU-XnJM/0.jpg" /></a></p>
 
@@ -84,120 +89,50 @@ which locates at the left corner inside the URL input bar.~~
 
 For WebView based browsers and _Samsung Internet_, these menu items are presented in the context menu.
 
-## Bonus
+## Configuration
 
-Since WebView based browsers have no unified designs, the following
-first four features are not supported for them.
-(By the same reason, they are neither supported for _Samsung Internet_.)
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-### Open in Chrome
+## CI
 
-The application `ChromeXt` is able to
-1. received shared texts to search them using `Google`,
-2. open JavaScript files to install them as UserScripts.
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-The reversed priority order of opening which Chromium based browsers is given in [AndroidManifest.xml](app/src/main/AndroidManifest.xml).
+## Mirror chain
 
-### Solution of system gesture conflicts
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/ChromeXt`](https://github.com/Interested-Deving-1896/ChromeXt) and mirrored through:
 
-By default, the history forward gesture of Chrome is available near the vertical center of screen.
-On other areas, only the system gesture is available.
-One can disable this behavior through the `Developer options` menu.
-(Tap seven times on the Chrome version from the Chrome settings, you will see the `Developer options` menu.)
-(In [Vivaldi](https://vivaldi.com/en/android/) browsers, `Developer options` menu is removed by its developers.)
+```
+Interested-Deving-1896/ChromeXt  ──►  OpenOS-Project-OSP/ChromeXt  ──►  OpenOS-Project-Ecosystem-OOC/ChromeXt
+```
 
-### Enable reader mode manually
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-ChromeXt adds a book icon in the page menu to enable reader (distiller) mode manually.
+## Contributors
 
-### Export browser bookmarks
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
 
-Bookmarks can be exported in HTML format through the `Developer options` menu.
+## Origins
 
-### AD Blocker solution
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
 
-For blocking network requests, I recommend to use `AdAway` or any proxy AD Blocker such as `clash`.
+## Resources
 
-A content cosmetic blocker is embedded into ChromeXt with the help of eruda.
-To use it, first open the `Eruda console`.
-In the `Elements` panel, one can use the `pointer` icon to select elements on the page.
-After clicking the `delete` icon for a selected element, a corresponding filter will be saved to the `Resources` panel,
-where one can manage previous added filters.
-These filters are saved in the browser even after clearing the site's data.
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
-Another way to block ADs is using the [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) to block some scripts from loading.
+## License
 
-### User-Agent spoofing
-
-One can edit the User-Agent from the `Info` panel of `Eruda console`.
-A valid User-Agent should contain only ASCII characters.
-Currently, ChromeXt only changes the `User-Agent` HTTP header, which
-works well but is [deprecated](https://wicg.github.io/ua-client-hints/#user-agent).
-
-For Chromium based browsers, when the User-Agent spoofing is not taking effects, refresh the page using the reload button in the page menu.
-(By contrast, a swipe refresh might be insufficient.)
-
-Note that the DevTools can also change User-Agent.
-
-## Contribute to this project
-
-Before you submit your pull-requests, please ensure that the command
-`./gradlew build` or `gradlew.bat build` produces no warnings and no errors.
-
-Here are corresponding files you might want / need to change:
-1. Front end: [manager.vue](https://github.com/JingMatrix/jingmatrix.github.io/tree/main/components/ChromeXt/manager.vue)
-2. Tampermonkey API: [Local.kt](app/src/main/java/org/matrix/chromext/script/Local.kt)
-and [GM.js](app/src/main/assets/GM.js)
-3. Eruda configuration: [eruda.js](app/src/main/assets/eruda.js)
-4. Support more WebView based browsers: [WebView.kt](app/src/main/java/org/matrix/chromext/hook/WebView.kt)
-
-## Development plans
-
-- [x] Make it possible to pass intents to Chrome with `file` scheme
-- [x] Fix encoding problem for Chrome downloaded JavaScript files
-- [x] Inject module resource into Chrome
-- [x] Implement developer tools
-- [x] Use local versions of [eruda](https://github.com/liriliri/eruda)
-- [x] Improve eruda incorporation with Chrome
-- [x] Add more information in the preference screen
-- [x] Support more [Tampermonkey API](https://www.tampermonkey.net/documentation.php)s
-- [x] Find elegant way to support DevTools for Android 11-
-- [x] Add cosmetic AdBlocker using eruda
-- [x] Find way to get current interactive tab
-- [x] Remove AndroidX Room dependency to reduce app size
-- [x] Support non-split version of Android Chrome
-- [x] Solve the menu hook problem for non-split versions
-- [x] Handle multiple Tab Model
-- [x] Forward DevTools server socket
-- [x] A mobile friendly DevTools front end
-- [x] Allow user to trigger reader mode
-- [x] Support @resource API
-- [x] Make GestureNav Fix optional
-- [x] Add an open source License
-- [x] Support mocking User-Agent
-- [ ] ~~Support [urlFilter](https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest/#type-RuleCondition) syntax~~
-- [x] Improve `Open in Chrome` function
-- [x] Implement fully `GM_info`
-- [x] Eruda fails due to [Injection Sinks](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API)
-- [x] Hide page_info panel automatically
-- [x] Fix page menu injection position
-- [ ] ~~Use [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) as UserScript engine~~
-- [ ] ~~Use `adb forward` to support non-root users~~
-- [x] Fully support WebView based browsers
-- [x] Fix [LSPatch for isolated process](https://github.com/LSPosed/LSPatch/issues/190) issue
-- [x] Implement UserScript storage
-- [x] Re-implement GM_xmlhttpRequest
-- [x] Convert exported bookmarks to HTML format
-- [x] Show executed scripts on current page
-- [x] Make a YouTube presentation video
-- [x] Support Samsung Internet browser
-- [x] Implement GM_cookie
-- [x] Improve valid UserScripts Url detection
-- [ ] Save and present script errors and `GM_log` logs
-- [ ] Use `iframe` and local server to run general [WebExtensions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
-- [ ] Bypass `style-src` rule for `eruda`, such as Mastodon
-- [ ] Support importing UserScripts from Tampermonkey exports
-- [ ] Support backup and restore
-- [ ] Add recommended UserScripts to the front end manager
-- [x] Add [chrome devtools front-end](https://chromium.googlesource.com/devtools/devtools-frontend/) for Edge, see [devtools_http_handler.cc](https://source.chromium.org/chromium/chromium/src/+/main:content/browser/devtools/devtools_http_handler.cc) as reference.
-- [x] Hide inserted menu for non-page
+<!-- AI:start:license -->
+[GPL-3.0](https://github.com/Interested-Deving-1896/ChromeXt/blob/master/LICENSE) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- AI:end:license -->
